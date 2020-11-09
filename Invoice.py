@@ -23,9 +23,22 @@ class Invoice:
         total_discount = round(total_discount, 2)
         return total_discount
 
+    def totalUnits(self, products):
+        total_units = 0
+        for k, v in products.items():
+            total_units += int(v['qnt'])
+        return total_units
+
     def totalPurePrice(self, products):
         total_pure_price = round(self.totalImpurePrice(products) - self.totalDiscount(products), 2)
         return total_pure_price
+
+    def totalTax(self, products):
+        total_tax = 0
+        for k, v in products.items():
+            total_tax += float(v['unit_price'] * float(v['tax']))
+        total_tax = round(total_tax, 2)
+        return total_tax
 
     def inputAnswer(self, input_value):
         while True:
